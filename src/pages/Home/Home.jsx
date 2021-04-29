@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Table, Switch, Space, Menu, Dropdown, Button, message } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined, DownloadOutlined } from '@ant-design/icons';
+import apis from "../../services/apis";
 
 
 import './Home.less';
@@ -23,6 +24,7 @@ const Home = () => {
     const onClick = ({ key }) => {
       setSortField(sort_fields[key]);
     };
+
     const onChange = (pagination, filters, sorter, extra) => {
       setPerPage(pagination.pageSize);
       setPage(pagination.current);
@@ -107,6 +109,9 @@ const Home = () => {
                       onChange={()=>setSortDirection(-1*sortDirection)}
                       defaultChecked
                     />
+                    <Button type="primary" shape="round" icon={<DownloadOutlined/>} size='small' href={(()=>`${apis.BASE_SERVER_URL}/fetch-csv`)()}>
+                      CSV
+                    </Button>
                   </Space>
                   <br/><br/>
                   {
